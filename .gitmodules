@@ -1,0 +1,3 @@
+[submodule "vendor/stock-price"]
+	path = vendor/stock-price
+	url = https://github.com/ankit02327/stock-price.git
