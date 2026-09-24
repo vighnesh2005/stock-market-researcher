@@ -17,6 +17,27 @@ from src.analysis.technical import TechnicalSummary, calculate_technical_summary
 from src.data.discovery import StockMetadata
 
 
+def _df_to_markdown(df: pd.DataFrame) -> str:
+    """Format a pandas DataFrame as a GitHub-flavored Markdown table without tabulate."""
+    headers = [df.index.name or "Index"] + list(df.columns)
+    lines = [
+        "| " + " | ".join(str(h) for h in headers) + " |",
+        "| " + " | ".join(":---" for _ in headers) + " |",
+    ]
+    for idx, row in df.iterrows():
+        formatted_row = [str(idx)]
+        for val in row:
+            if isinstance(val, (float, int)):
+                if isinstance(val, float):
+                    formatted_row.append(f"{val:.4f}" if abs(val) < 1 else f"{val:.2f}")
+                else:
+                    formatted_row.append(str(val))
+            else:
+                formatted_row.append(str(val))
+        lines.append("| " + " | ".join(formatted_row) + " |")
+    return "\n".join(lines)
+
+
 class ResearchReportGenerator:
     """Generates factual, objective stock market research reports."""
 
@@ -181,8 +202,8 @@ class ResearchReportGenerator:
     @classmethod
     def generate_comparison_markdown(cls, comp_result: StockComparisonResult) -> str:
         """Generate a structured Markdown report comparing multiple stocks."""
-        table_md = comp_result.comparison_table.to_markdown()
-        corr_md = comp_result.correlation_matrix.to_markdown()
+        table_md = _df_to_markdown(comp_result.comparison_table)
+        corr_md = _df_to_markdown(comp_result.correlation_matrix)
 
         md_lines = [
             f"# Multi-Stock Comparative Research Summary",
