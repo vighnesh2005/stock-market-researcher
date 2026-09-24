@@ -117,18 +117,14 @@ def calculate_risk_metrics(
     peak_date_str = str(peak_date_idx)[:10]
     peak_price = prices.loc[peak_date_idx]
 
-    # Find recovery date if any (first date after trough where price >= peak_price)
+    # Find recovery date if any (first date strictly after trough where price >= peak_price)
     post_trough_prices = prices.loc[trough_date_idx:]
-    recovered_slice = post_trough_prices[post_trough_prices >= peak_price]
-    if not recovered_slice.empty and len(recovered_slice) > 1:
-        # First date strictly after trough that matches or exceeds peak
-        rec_date_idx = recovered_slice.index[recovered_slice.index > trough_date_idx]
-        if not rec_date_idx.empty:
-            rec_date_str: Optional[str] = str(rec_date_idx[0])[:10]
-            end_duration_dt = rec_date_idx[0]
-        else:
-            rec_date_str = None
-            end_duration_dt = prices.index[-1]
+    recovered_slice = post_trough_prices[
+        (post_trough_prices.index > trough_date_idx) & (post_trough_prices >= peak_price)
+    ]
+    if not recovered_slice.empty:
+        rec_date_str: Optional[str] = str(recovered_slice.index[0])[:10]
+        end_duration_dt = recovered_slice.index[0]
     else:
         rec_date_str = None
         end_duration_dt = prices.index[-1]
