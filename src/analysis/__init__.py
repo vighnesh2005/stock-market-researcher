@@ -11,6 +11,14 @@ from src.analysis.risk import (
     calculate_drawdown_series,
     calculate_risk_metrics,
 )
+from src.analysis.technical import (
+    TechnicalSummary,
+    add_technical_indicators,
+    calculate_bollinger_bands,
+    calculate_ema,
+    calculate_sma,
+    calculate_technical_summary,
+)
 
 __all__ = [
     "ReturnMetrics",
@@ -20,4 +28,10 @@ __all__ = [
     "RiskMetrics",
     "calculate_drawdown_series",
     "calculate_risk_metrics",
+    "TechnicalSummary",
+    "add_technical_indicators",
+    "calculate_bollinger_bands",
+    "calculate_ema",
+    "calculate_sma",
+    "calculate_technical_summary",
 ]
