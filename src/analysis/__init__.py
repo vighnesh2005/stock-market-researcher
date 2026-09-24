@@ -19,6 +19,10 @@ from src.analysis.technical import (
     calculate_sma,
     calculate_technical_summary,
 )
+from src.analysis.comparison import (
+    StockComparator,
+    StockComparisonResult,
+)
 
 __all__ = [
     "ReturnMetrics",
@@ -34,4 +38,6 @@ __all__ = [
     "calculate_ema",
     "calculate_sma",
     "calculate_technical_summary",
+    "StockComparator",
+    "StockComparisonResult",
 ]
