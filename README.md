@@ -31,3 +31,6 @@ https://github.com/ankit02327/stock-price
 The repository is included as a Git submodule under:
 
 vendor/stock-price
+
+Upstream project:
+https://github.com/ankit02327/stock-price
