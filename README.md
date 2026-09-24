@@ -22,3 +22,12 @@ vendor/stock-price
 
 - Repository: https://github.com/ankit02327/stock-price
 - Upstream version: v0.1.8
+## Upstream Dependency
+
+This project uses the stock-price project by Ankit Kumar:
+
+https://github.com/ankit02327/stock-price
+
+The repository is included as a Git submodule under:
+
+vendor/stock-price
